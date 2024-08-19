@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anniversary Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: linear-gradient(to bottom, #000000, #5B9D56);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+         
+        }
+
+        @font-face {
+            font-family: 'Netflix Sans';
+            src: url('https://assets.nflxext.com/en_us/pages/frontend/fonts/Helvetica-Neue-Bold.woff2') format('woff2');
+        }
+
+        body, h1 {
+            font-family: 'Netflix Sans', sans-serif;
+            
+        }
+
+        .neon-button {
+            background-color: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px #ffffff;
+            cursor: pointer;
+        }
+
+        .neon-button:hover {
+            background-color: #ffffff;
+            color: #3A3030;
+            box-shadow: 0 0 30px #5B9D56, 0 0 60px #5B9D56;
+        }
+
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: auto;
+            justify-content: center;            
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0; /* Default state: hidden */
+            visibility: hidden; /* Ensure it's not visible */
+            z-index: 1; /* Ensure it's beneath active page */
+        }
+
+        .page.active {
+           
+            opacity: 1; /* Visible when active */
+            visibility: visible; /* Ensure it's visible */
+            z-index: 2; /* Ensure it's on top */
+        }
+
+        .page.inactive {
+            opacity: 0; /* Invisible when inactive */
+            visibility: hidden; /* Ensure it's not visible */
+        }
+        #page2 {
+            
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #page2 .content {
+            background-color: #beb6a4;
+            border: 1px solid #302121;
+            border-radius: 8px;
+            padding: 40px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            text-align: left;
+            margin: 0;
+        }
+
+        #page2 h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #000000;
+            font-style: italic;
+        }
+
+        #page2 p {
+            margin-bottom: 15px;
+        }
+
+        #page2 #signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Polaroid Style */
+        .polaroid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .polaroid {
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            transform: rotate(calc(var(--rotate-angle) * 1deg));
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .polaroid img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .polaroid p {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        /* Halaman Terakhir */
+              /* Halaman Terakhir */
+              .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1; /* Confetti berada di bawah teks */
+        }
+
+        .confetti .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0;
+            opacity: 0.8;
+            border-radius: 50%;
+            animation: confetti-fall 3s infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .glow {
+            color: #FFD700;
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgm" autoplay loop>
+        <source src="audio/hmt.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+     <!-- Page 1 -->
+     <div id="page1" class="page active"> <br> <br> <br> <br> <br> <br> <br> <br><br> <br><br> <br><br> <br>
+        <div class="confetti"> 
+            <div class="confetti-piece" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+            <div class="confetti-piece" style="top: 20%; left: 25%; animation-delay: 0.5s;"></div>
+            <div class="confetti-piece" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
+            <div class="confetti-piece" style="top: 40%; left: 55%; animation-delay: 1.5s;"></div>
+            <div class="confetti-piece" style="top: 50%; left: 70%; animation-delay: 2s;"></div>
+        </div>
+        <h1>Happy Mensive Sayangku!</h1>
+        <p>web ini didedikasikan khusus untuk sayangku yang paling cantik <br> didunia ini.</p>
+        <button class="neon-button" onclick="transitionToPage2()">Tekan akuu!</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="page">
+        <div class="content">
+            <h1>Dear [Kaisa],</h1>
+            <p>Pertama-tama aku ingin mengucapkan banyak terima kasih kepadamu, wahai wanitaku yang paling cantik dan indah di dunia ini. Terima kasih karena kamu selalu ada disini bersama dengan-ku hingga tak terasa 5 bulan sudah berlalu.</p>
+            <p>Aku tidak bisa mengetik panjang disini, jadi singkat saja. Aku ingin mencintai mu lebih banyak dari butiran pasir dipinggir pantai, lebih besar dari lautan lepas, dan lebih lama dari selamanya.</p>
+            <p>Melalui pesan singkat ini aku harap perasaan ku yang tulus bisa tersampaikan dengan baik kepadamu. Mari melanjutkan kisah ini hingga hari, bulan, dan tahun berikutnya. Aku akan selalu mencintaimu, sebagaimana tanah di bumi yang tak pernah membenci hujan. I Love you, Kaisa-ku.</p>
+            <div id="signature">
+                With love,<br>
+                [Dylan]
+            </div>
+        <button class="neon-button" onclick="transitionToPage3()">click here <3</button>
+    </div>
+</div>
+
+    <!-- Page 3 -->
+    <div id="page3" class="page"> 
+        <h1>OUR MEMORIES</h1>
+        <div class="polaroid-container">
+            <div class="polaroid" style="--rotate-angle: -10;">
+                <img src="images/foto1.jpg" alt="Foto 1">
+                <p>Sasa buat ch khusus untuk <br> kenangan kita berdua <br> dia selalu ngepost aku disini. <br> gemes kan hehehe</p>
+            </div>
+            <div class="polaroid" style="--rotate-angle: 7;">
+                <img src="images/foto2.jpg" alt="Foto 2">
+                <p>Ini lukisan Sasa alias pacarku <br> yg paling cantik. <br> maknanya dalem banget <br> aku sampe terharu bacanya</p>
+            </div>
+            <div class="polaroid" style="--rotate-angle: -5;">
+                <img src="images/foto3.jpg" alt="Foto 3">
+                <p>Sasa buat grup game <br> katanya biar bisa quality <br> time sama aku. gemassss</p>
+            </div>
+            <div class="polaroid" style="--rotate-angle: 12;">
+                <img src="images/foto4.jpg" alt="Foto 4">
+                <p>kalo yg ini gambaran aku. <br> singkatnya sih maknanya itu <br> Sasa yg udah nyelametin aku</p>
+            </div>
+            <div class="polaroid" style="--rotate-angle: -8;">
+                <img src="images/foto5.jpg" alt="Foto 5">
+                <p>Ini waktu aku ultah terus Kaisa <br> buatin blog. I'm so lucky</p>
+            </div>
+        </div>
+        <button class="neon-button" onclick="transitionToPage4()">NEXT</button>
+    </div>
+
+    <!-- Page 4 (Terakhir) -->
+    <div id="page4" class="page"> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+        <div class="confetti">
+            <!-- Confetti pieces -->
+            <div class="confetti-piece" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+            <div class="confetti-piece" style="top: 20%; left: 25%; animation-delay: 0.5s;"></div>
+            <div class="confetti-piece" style="top: 30%; left: 40%; animation-delay: 1s;"></div>
+            <div class="confetti-piece" style="top: 40%; left: 55%; animation-delay: 1.5s;"></div>
+            <div class="confetti-piece" style="top: 50%; left: 70%; animation-delay: 2s;"></div>
+        </div>
+        <h1 class="glow">I LOVE YOU KAISAKU <3</h1>
+        <button class="neon-button" onclick="transitionToPage1()">END <3</button>
+    </div>
+    </div>
+
+    <script>
+        function transitionToPage2() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page1').classList.add('inactive');
+            document.getElementById('page2').classList.remove('inactive');
+            document.getElementById('page2').classList.add('active');
+        }
+
+        function transitionToPage3() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page2').classList.add('inactive');
+            document.getElementById('page3').classList.remove('inactive');
+            document.getElementById('page3').classList.add('active');
+        }
+
+        function transitionToPage4() {
+            document.getElementById('page3').classList.remove('active');
+            document.getElementById('page3').classList.add('inactive');
+            document.getElementById('page4').classList.remove('inactive');
+            document.getElementById('page4').classList.add('active');
+        }
+
+        function transitionToPage1() {
+            document.getElementById('page4').classList.remove('active');
+            document.getElementById('page4').classList.add('inactive');
+            document.getElementById('page1').classList.remove('inactive');
+            document.getElementById('page1').classList.add('active');
+        }
+  
+        function addConfetti() {
+        const canvas = document.createElement('canvas');
+        document.body.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const confettiArray = [];
+        const confettiColors = ['#FFC107', '#FF5722', '#8BC34A', '#00BCD4', '#E91E63', '#9C27B0'];
+        const maxConfetti = 300;
+
+        class Confetti {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 15 + 10;
+                this.fallSpeed = Math.random() * 2.5 + 1.5;
+                this.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                this.opacity = Math.random() * 0.7 + 0.3;
+                this.rotation = Math.random() * 360;
+            }
+
+            update() {
+                this.y += this.fallSpeed;
+                this.rotation += Math.random() * 2;
+                if (this.y > canvas.height) {
+                    this.y = -this.size;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size, this.size / 2, 0, this.size);
+                ctx.bezierCurveTo(this.size, this.size / 2, this.size / 2, -this.size / 2, 0, 0);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.restore();
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < maxConfetti; i++) {
+                confettiArray.push(new Confetti());
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confettiArray.forEach(confetti => {
+                confetti.update();
+                confetti.draw();
+            });
+            requestAnimationFrame(animateConfetti);
+        }
+
+        createConfetti();
+        animateConfetti();
+    }
+
+    const page1 = document.getElementById('page1');
+const page4 = document.getElementById('page4');
+
+console.log('Page 1:', page1);
+console.log('Page 4:', page4);
+
+if (page1 || page4) {
+    console.log('Confetti should appear on this page.');
+    addConfetti();
+} else {
+    console.log('No confetti on this page.');
+}
+
+
+</script>
+</body>
+</html>
